@@ -10,6 +10,6 @@ of higher order of accuracy.
 
 <div style="width: 20%; height: 20%">
   
-![Alt text](TF_Ref_pic.png)
+![Alt text](TF_Ref_pic.png) width=20% height=20%
   
 </div>
