@@ -7,12 +7,4 @@ Simple modifications to this code will allow users to implement other schemes
 of higher order of accuracy. 
 
 
-
-<div style="width: 20%; height: 20%">
-  
-![Alt text](TF_Ref_pic.png) 
-  
-</div>
-
-
 <img src="TF_Ref_pic.png" width=400px height=400px>
