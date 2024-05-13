@@ -15,4 +15,4 @@ of higher order of accuracy.
 </div>
 
 
-<img src="TF_Ref_pic.png" width=300px height=300px>
+<img src="TF_Ref_pic.png" width=400px height=400px>
