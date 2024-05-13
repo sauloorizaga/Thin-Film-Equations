@@ -8,7 +8,7 @@ of higher order of accuracy.
 
 
 
-<div style="width: 60%; height: 60%">
+<div style="width: 20%; height: 20%">
   
 ![Alt text](TF_Ref_pic.png)
   
