@@ -4,13 +4,9 @@
 function [Stability]=BertoziMethod_Stability(dt,M1,iter,tfinal)
 
 clear Energy time Mvar GUvar
-clc;
+clc;Stability=1;
 
-Stability=1;
-
-M=12;
-a=0;
-b=M*pi;
+M=12;a=0;b=M*pi;
 %number of grid points N
 N=256;
 %uniform mesh thickness
@@ -22,7 +18,7 @@ n=N;
 x=[a+h:h:b];[X,Y] = meshgrid(x,x);
 
 %wave number generation (same as in 1d)
-k=[[0:N/2] [-N/2+1:-1]]./((M+4*0)/2);
+k=[[0:N/2] [-N/2+1:-1]]./((M)/2);
 
 %now in 2-d, here k2 means k^2  and k=(k1,k2) 
  [k1x k1y]=meshgrid(k.^1,k.^1);
@@ -34,13 +30,11 @@ k=[[0:N/2] [-N/2+1:-1]]./((M+4*0)/2);
 %Initial Condition---------------------------------
 load('ICactive.mat','U');
 %--------------------------------------------------
-
 figure(1);
 mesh(X,Y,U)
 ax = gca; 
 ax.FontSize = 14;
 colormap('jet')
-
 %parameters
 epsilon=.1*1;
 eps2=epsilon^2;
@@ -55,7 +49,6 @@ lhs=1+dt*M1*k4;      %Tom W.
 %lhs=1+dt*M1*k4*eps2;   %A.Bertozzi
 %Left hand sidee-------------------------------
 
-
 hat_U = fft2(U); 
 it = 0; j=0; nn=0;   t = 0.0;
 
@@ -67,19 +60,16 @@ energy=-(eps2./(U.^2)).*((1/2)-epsilon./(3*U))+(1/2)*0.1*U.^2+(1/2)*( Ue1.^2+Ue2
 Energy(1)=h*h*sum(sum(energy));
 time(1)=0;
 
-
 while (t <  tfinal-dt*1*0-.0000001 )
 
 U1 = U;  %Just Eyres scheme - no initial guess
              
 for i=1:iter
       RHS=FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1);
-      
       hat_rhs =hat_U + dt.*fft2(RHS);
       hat_U1 = hat_rhs./lhs;
       U1 = ifft2(hat_U1);
 end
-
 U=U1;    %update 
 hat_U=hat_U1;
 it = it+1;
@@ -105,23 +95,6 @@ if Energy(it+1)>Energy(it)
     break                   % This break will stop the code if energy increases - unstable
 end
    
-% 
-% if M1>.3 && dt<20/2^6
-%     Stability=1;
-%     break                   % This break code for already known stanle regions
-% end
-% 
-% if M1>.28 && dt<20/2^12
-%     Stability=1;
-%     break                   % This break code for already known stanle regions
-% end
-% 
-% if M1<.22 && dt>20/2^14
-%     Stability=0;
-%     break                   % This break code for already known stanle regions
-% end
-
-
 end  %main loop
 
 figure(30);
@@ -131,12 +104,11 @@ ax.FontSize = 14;
 colormap('jet')
 %title(['t_{F}=' num2str(t)] )
 
-
   U1=U;
   load('Uexact','U');
   error=h*h.*sum(sum(abs(U1-U)));          %L1 error
  
- figure(31);
+figure(31);
 mesh(X,Y,U)
 ax = gca; 
 ax.FontSize = 14;
