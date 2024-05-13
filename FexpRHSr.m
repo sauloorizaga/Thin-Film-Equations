@@ -5,15 +5,12 @@ function [RHS] = FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1)
       %U1(U1<=epsilon/100)=epsilon/100;   
  
       MU=U1.*U1.*U1;
-      %MU=U1.^7./((10^-2)*U1.^3+U1.^4);
       phiU = (-eps2./(U1.^4)).*(3-(4*epsilon)./U1)+0.1;
       gU=MU.*phiU;
             
       %-----------RHS1------------------
       %LapU
       LapU1=ifft2(-1*k2.*fft2(U1));
-      
-      %%LapU1=eps2*LapU1;  %A.Bertozzi
       
       %gradient (lapU1)=<lapU1_x,lapU1_y>
       lapU1_x=ifft2(1i*k1x.*fft2(LapU1));
@@ -27,8 +24,7 @@ function [RHS] = FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1)
       rhs1=real(rhs1); 
       %------------------------------------------------------------------
       
-      %-----------RHS2------------------ Commenting RHS2 gives the
-      %Lubracation PDE ignores RHS2.
+      %-----------RHS2------------------
       
       f1=ifft2(1i*k1x.*fft2(U1));
       f2=ifft2(1i*k1y.*fft2(U1));
@@ -40,10 +36,6 @@ function [RHS] = FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1)
       rhs2=ifft2(1i*k1x.*fft2(f1))+ifft2(1i*k1y.*fft2(f2));
       rhs2=real(rhs2);
       %------------------------------------------------------
-  
       RHS=rhs1+rhs2;
-      
-%      RHS=rhs1;
-
 
 end
