@@ -13,3 +13,6 @@ of higher order of accuracy.
 ![Alt text](TF_Ref_pic.png) width=20% height=20%
   
 </div>
+
+
+<img src="TF_Ref_pic.png" width=100px height=100px>
