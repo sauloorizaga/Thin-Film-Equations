@@ -1,13 +1,8 @@
 function [RHS] = FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1)
-
-%UNTITLED3 Summary of this function goes here
-%   Detailed explanation goes here
-      %U1(U1<=epsilon/100)=epsilon/100;   
  
       MU=U1.*U1.*U1;
       phiU = (-eps2./(U1.^4)).*(3-(4*epsilon)./U1)+0.1;
-      gU=MU.*phiU;
-            
+      gU=MU.*phiU;      
       %-----------RHS1------------------
       %LapU
       LapU1=ifft2(-1*k2.*fft2(U1));
@@ -23,9 +18,7 @@ function [RHS] = FexpRHSr(epsilon,eps2,M1,k1x,k1y,k2,U1)
       rhs1=ifft2(1i*k1x.*fft2(lapU1_x))+ifft2(1i*k1y.*fft2(lapU1_y));
       rhs1=real(rhs1); 
       %------------------------------------------------------------------
-      
       %-----------RHS2------------------
-      
       f1=ifft2(1i*k1x.*fft2(U1));
       f2=ifft2(1i*k1y.*fft2(U1));
       
