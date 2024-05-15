@@ -1,3 +1,5 @@
+### Thin-Film (TF) equation
+
 These files implement the Biharmonic-Modified approach for
 TF equations and variable mobility CH equations.
 
