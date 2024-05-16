@@ -1,31 +1,22 @@
-%This code will serve as a tool to determine
-%energy-stable solutions.
-
-function [Stability]=BertoziMethod_Stability(dt,M1,iter,tfinal)
-
-clear Energy time Mvar GUvar
+%This code will serve as a tool to determine energy-stable solutions.
+function [Stability]=BertozziMethod_Stability(dt,M1,iter,tfinal)
+clear Energy time Mvar 
 clc;Stability=1;
 
 M=12;a=0;b=M*pi;
 %number of grid points N
-N=256;
-%uniform mesh thickness
-h=(b-a)/N;
+N=256;h=(b-a)/N;
 %(Periodic bdy conditions)
 n=N;
-
 %xgrid formtation (a b] and eventually (a b]^2
 x=[a+h:h:b];[X,Y] = meshgrid(x,x);
 
 %wave number generation (same as in 1d)
 k=[[0:N/2] [-N/2+1:-1]]./((M)/2);
 
-%now in 2-d, here k2 means k^2  and k=(k1,k2) 
  [k1x k1y]=meshgrid(k.^1,k.^1);
  
- [kx ky]=meshgrid(k.^2,k.^2);
- k2=kx+ky;
- k4=k2.^2;
+ [kx ky]=meshgrid(k.^2,k.^2);k2=kx+ky;k4=k2.^2;
 
 %Initial Condition---------------------------------
 load('ICactive.mat','U');
@@ -36,13 +27,8 @@ ax = gca;
 ax.FontSize = 14;
 colormap('jet')
 %parameters
-epsilon=.1*1;
-eps2=epsilon^2;
-
-M1;
-Bertozzinumber=max(max(U.^3));
-Mvar(1)=max(max(U.^3));
-GUvar(1)= max(max(-epsilon*epsilon*(3.0.*log(U)+4.0*epsilon./U)+0.25.*(0.1).*U.^4));
+epsilon=.1;eps2=epsilon^2;
+M1;Bertozzinumber=max(max(U.^3));Mvar(1)=max(max(U.^3));
 
 %The LHS, left hand side of problem----------
 lhs=1+dt*M1*k4;      %Tom W.
@@ -84,35 +70,23 @@ Energy(it+1)=h*h*sum(sum(energy));
 time(it+1)=t;
 
 Mvar(it+1)=max(max(U.^3));
-GUvar(it+1)= max(max(-eps*eps*(3.0.*log(U)+4.0*eps./U)+0.25.*(0.1).*U.^4));
-GUvar(it+1)= max(max(-epsilon*epsilon*(3.0.*log(U)+4.0*epsilon./U)+0.25*(0.1).*U.^4));
-
-% % figure(3);                  %if monitoring the solution is needed.
-% % mesh(X,Y,U)
-
+% % figure(3);mesh(X,Y,U)   %if monitoring the solution is needed. 
 if Energy(it+1)>Energy(it)
     Stability=0;
     break                   % This break will stop the code if energy increases - unstable
 end
-   
 end  %main loop
 
 figure(30);
-mesh(X,Y,U)
-ax = gca; 
-ax.FontSize = 14;
-colormap('jet')
+mesh(X,Y,U)ax = gca; ax.FontSize = 14;colormap('jet')
 %title(['t_{F}=' num2str(t)] )
 
-  U1=U;
-  load('Uexact','U');
-  error=h*h.*sum(sum(abs(U1-U)));          %L1 error
- 
+U1=U;  
+load('Uexact','U');error=h*h.*sum(sum(abs(U1-U)));          %L1 error
+
 figure(31);
 mesh(X,Y,U)
-ax = gca; 
-ax.FontSize = 14;
-colormap('jet')
+ax = gca; ax.FontSize = 14;colormap('jet')
 %title(['t_{F}=' num2str(t)] )
 
  %Energy Plotting and Reporting Stability 
@@ -122,27 +96,4 @@ colormap('jet')
 % % axis([time(1) time(end) min(Energy) max(Energy)])
 % % xlabel('time')
 % % ylabel('Free Energy')
-% % 
-% % figure(6)
-% % %plot(time,Mvar,'o-',time,GUvar,'o-')
-% % plot(time,Mvar,'.-')
-% % axis([time(1) time(end) min(Mvar) max(Mvar)])
-% % h = legend('$\bar{M}(t)$');
-% % set(h,'interpreter','Latex','FontSize',12)
-% % %legend('$\bar M(t)$')
-% % xlabel('time')
-% % %ylabel('M_1')
-% % h=ylabel('$\bar{M}(t)$');
-% % set(h,'interpreter','Latex','FontSize',12)
-% % 
-% % figure(7)
-% % plot(time,GUvar,'.-')
-% % axis([time(1) time(end) min(GUvar) max(GUvar)])
-% % h = legend('$\bar{G}(t)$');
-% % set(h,'interpreter','Latex','FontSize',12)
-% % %legend('$\bar M(t)$')
-% % xlabel('time')
-% % %ylabel('G_1')
-% % h=ylabel('$\bar{G}(t)$');
-% % set(h,'interpreter','Latex','FontSize',12)
 end
