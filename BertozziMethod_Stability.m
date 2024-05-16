@@ -13,10 +13,8 @@ x=[a+h:h:b];[X,Y] = meshgrid(x,x);
 
 %wave number generation (same as in 1d)
 k=[[0:N/2] [-N/2+1:-1]]./((M)/2);
-
- [k1x k1y]=meshgrid(k.^1,k.^1);
- 
- [kx ky]=meshgrid(k.^2,k.^2);k2=kx+ky;k4=k2.^2;
+[k1x k1y]=meshgrid(k.^1,k.^1);
+[kx ky]=meshgrid(k.^2,k.^2);k2=kx+ky;k4=k2.^2;
 
 %Initial Condition---------------------------------
 load('ICactive.mat','U');
