@@ -1,4 +1,5 @@
 %This code will serve as a tool to compute the numerical solution for the TF equation
+%the codes requires the file ICactive.mat to be in the same folder in order to run.
 function [output]=BertozziMethod(dt,M1,iter,tfinal)
 clear Energy time Mvar 
 clc;output=1;
