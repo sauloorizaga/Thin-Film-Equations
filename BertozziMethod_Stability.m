@@ -1,7 +1,7 @@
-%This code will serve as a tool to determine energy-stable solutions.
-function [Stability]=BertozziMethod_Stability(dt,M1,iter,tfinal)
+%This code will serve as a tool to compute the numerical solution for the TF equation
+function [output]=BertozziMethod(dt,M1,iter,tfinal)
 clear Energy time Mvar 
-clc;Stability=1;
+clc;output=1;
 
 M=12;a=0;b=M*pi;
 %number of grid points N
