@@ -15,3 +15,6 @@ of higher order of accuracy which are discussed in the paper.
 Runnig the code BertozziMethod.m will generate the following plot
 
 <img src="TF_Ref_pic.png" width=400px height=400px>
+
+
+Running the code TF_5holes_simulations.m will generate the following plot
