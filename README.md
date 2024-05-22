@@ -12,5 +12,6 @@ of higher order of accuracy which are discussed in the paper.
 ### IMEX Methods for TF equations and CH equations with variable mobility.
 ### Authors: Saulo Orizaga and Thomas Wilteski.
 
-Runnig the code Bertozzi.m will generate the following plot
+Runnig the code BertozziMethod.m will generate the following plot
+
 <img src="TF_Ref_pic.png" width=400px height=400px>
