@@ -1,0 +1,10 @@
+simulation:
+  dt: 0.01
+  M1: 5
+  iter: 1
+  tfinal: 200
+  M: 6.
+  a: 0.
+  N: 64.
+  epsilon: .1
+  # eps2=epsilon^2;
