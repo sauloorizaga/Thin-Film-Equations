@@ -7,4 +7,8 @@ simulation:
   a: 0.
   N: 64.
   epsilon: .1
-  # eps2=epsilon^2;
+  it: 0.
+  j: 0.
+  nn: 0.
+  t: 0.0
+  init_U_z_shift: .6
