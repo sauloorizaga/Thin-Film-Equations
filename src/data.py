@@ -12,7 +12,6 @@ class ThinFilmData(ConfigReader):
         self._define_lhs()
         self._energy_computations()
 
-    
     def gaussian_bump(self, center_x, center_y, coefficient=0.5):
         """
         This function defines a 2D Gaussian bump centered at (center_x, center_y).
@@ -94,9 +93,9 @@ class ThinFilmData(ConfigReader):
         self.eps2 = self.epsilon**2
         
         # self.Y.size
+        self.Mvar = [np.max(np.max(self.U ** 3))]    
     
     def _define_lhs(self):
-       
         # The LHS, left hand side of problem----------
         self.lhs = 1 + self.dt*self.M1*self.k4
         

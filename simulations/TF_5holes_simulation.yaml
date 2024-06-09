@@ -7,7 +7,7 @@ simulation:
   a: 0.
   N: 64.
   epsilon: .1
-  it: 0.
+  it: 0
   j: 0.
   nn: 0.
   t: 0.0
